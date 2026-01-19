@@ -209,3 +209,8 @@ It is a **systems design and correctness project**.
 - Documentation: Complete
 
 This repository is **ready for review and discussion**.
+
+## How to Run
+
+```bash
+python main.py
