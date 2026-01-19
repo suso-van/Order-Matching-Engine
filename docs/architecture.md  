@@ -1,0 +1,86 @@
+# Architecture Overview
+
+This repository demonstrates the evolution of an order matching engine
+from a correctness-first concurrent design (V1) to a modern, event-driven,
+auditable system (V2), inspired by real financial exchanges.
+
+The goal of this project is not feature count, but **system correctness,
+determinism, and architectural clarity**.
+
+---
+
+## Version Evolution
+
+### V1 — Concurrent Matching Engine
+
+**Design**
+- Multi-threaded order submission
+- Global lock protecting order book
+- Price–time priority enforcement
+- In-memory state
+
+**Why this design**
+- Prioritizes correctness and fairness
+- Easy to reason about invariants
+- Suitable as a baseline implementation
+
+**Trade-offs**
+- Lock contention under load
+- Limited scalability
+
+---
+
+### V2 — Event-Driven Matching Engine
+
+**Design**
+- Multi-producer, single-writer model
+- Lock-free order submission
+- Deterministic matching loop
+- Event sourcing + audit logging
+
+**Why this design**
+- Eliminates lock contention
+- Guarantees deterministic execution
+- Simplifies debugging and recovery
+
+This mirrors how real exchanges structure their matching cores.
+
+---
+
+## High-Level Architecture (V2)
+
+
+---
+
+## Core Components
+
+### OrderBook
+- Price-level FIFO queues
+- Enforces price–time priority
+- No internal locking (single writer)
+
+### Matching Engine
+- Processes one order at a time
+- Applies matching rules deterministically
+- Emits trade and status events
+
+### Event Store (WAL)
+- Append-only log of immutable events
+- Source of truth for recovery
+- Used for deterministic replay
+
+### Audit Logger
+- Human-readable JSON records
+- Compliance and forensics
+- Independent of replay logic
+
+---
+
+## Design Principles
+
+- Correctness before performance
+- Determinism over parallelism
+- Clear separation of concerns
+- Explicit lifecycle state machines
+
+This architecture reflects real-world financial systems rather than toy projects.

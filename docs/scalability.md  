@@ -1,0 +1,71 @@
+# Scalability Analysis
+
+This document explains how the system scales, where it is limited,
+and how real-world systems evolve beyond this design.
+
+---
+
+## Current Scalability Model (V2)
+
+**Concurrency Model**
+- Multiple producers (clients)
+- Single consumer (matching engine)
+
+**Implication**
+- Only one thread mutates state
+- No locks inside matching logic
+
+---
+
+## Performance Characteristics
+
+### Benefits
+- Zero lock contention
+- Predictable latency
+- Strong correctness guarantees
+- Deterministic execution
+
+### Limitations
+- Throughput limited to one CPU core
+- Large orders may temporarily increase latency
+- Horizontal scaling requires sharding
+
+---
+
+## Scaling Strategies (Industry-Standard)
+
+### 1. Symbol-Level Sharding
+
+Each symbol has its own matching engine:
+
+
+- Horizontal scaling across cores or processes
+- Independent failure domains
+- Common in real exchanges
+
+---
+
+### 2. Snapshot + Log Compaction
+
+- Periodic snapshots of order book state
+- Truncate WAL up to snapshot
+- Reduces replay time and storage growth
+
+---
+
+### 3. Backpressure & Flow Control
+
+- Bounded queues
+- Throttling or rejection policies
+- Prevents memory exhaustion
+
+---
+
+## Why This Design Is Acceptable
+
+Real exchanges often prefer:
+- One deterministic core per symbol
+- Strong correctness guarantees
+- Operational simplicity
+
+This project intentionally models that philosophy.

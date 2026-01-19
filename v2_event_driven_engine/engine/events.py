@@ -1,0 +1,6 @@
+from enum import Enum
+
+class EventType(Enum):
+    ORDER_SUBMITTED = "ORDER_SUBMITTED"
+    TRADE_EXECUTED = "TRADE_EXECUTED"
+    ORDER_CANCELED = "ORDER_CANCELED"
