@@ -14,43 +14,64 @@ not UI or external integrations.
 ## Repository Structure
 ```
 Order-Matching-Engine/
-├── README.md
-├── LICENSE
-├── .gitignore
-│
 ├── docs/
 │   ├── architecture.md
-│   ├── scalability.md
-│   └── replay_and_audit.md
+│   ├── replay_and_audit.md
+│   └── scalability.md
 │
 ├── v1_order_matching_engine/
 │   ├── main.py
+│   ├── .gitignore
+│   │
 │   ├── concurrency/
+│   │   ├── __init__.py
+│   │   └── locks.py
+│   │
 │   ├── engine/
+│   │   ├── __init__.py
+│   │   ├── matcher.py
+│   │   ├── order_book.py
+│   │   └── trade.py
+│   │
 │   ├── models/
+│   │   ├── __init__.py
+│   │   ├── enums.py
+│   │   └── order.py
+│   │
 │   ├── tests/
-│   └── utils/
+│   │   ├── __init__.py
+│   │   └── test_matching.py
+│   │
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   └── metrics.py
 │
 ├── v2_event_driven_engine/
 │   ├── main.py
+│   ├── .gitignore
+│   │
+│   ├── data/
+│   │   └── .gitkeep
+│   │
 │   ├── engine/
+│   │   ├── __init__.py
+│   │   ├── audit_event.py
+│   │   ├── audit_logger.py
 │   │   ├── event_engine.py
+│   │   ├── event_log.py
+│   │   ├── event_store.py
+│   │   ├── events.py
 │   │   ├── order_book.py
 │   │   ├── trade.py
-│   │   ├── events.py
-│   │   ├── event_log.py
 │   │   └── wal_event_store.py
-│   ├── audit/
-│   │   ├── audit_event.py
-│   │   └── audit_logger.py
+│   │
 │   ├── models/
-│   │   ├── order.py
+│   │   ├── __init__.py
 │   │   ├── enums.py
-│   │   └── __init__.py
-│   ├── data/
-│   │   └── events.wal
-│   └── tests/
-
+│   │   └── order.py
+│
+├── LICENSE
+├── README.md
 ```
 Each version is **self-contained**, runnable, and documented.
 
