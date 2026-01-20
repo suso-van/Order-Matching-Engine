@@ -12,8 +12,8 @@ not UI or external integrations.
 ---
 
 ## Repository Structure
-
-ORDER-MATCHING-ENGINE/
+```
+Order-Matching-Engine/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
@@ -33,29 +33,25 @@ ORDER-MATCHING-ENGINE/
 │
 ├── v2_event_driven_engine/
 │   ├── main.py
-│   │
 │   ├── engine/
-│   │   ├── __init__.py
 │   │   ├── event_engine.py
 │   │   ├── order_book.py
 │   │   ├── trade.py
 │   │   ├── events.py
 │   │   ├── event_log.py
-│   │   ├── wal_event_store.py
+│   │   └── wal_event_store.py
+│   ├── audit/
 │   │   ├── audit_event.py
 │   │   └── audit_logger.py
-│   │
 │   ├── models/
-│   │   ├── __init__.py
+│   │   ├── order.py
 │   │   ├── enums.py
-│   │   └── order.py
-│   │
-│   └── data/
-│       ├── events.wal
-│       └── audit.log
+│   │   └── __init__.py
+│   ├── data/
+│   │   └── events.wal
+│   └── tests/
 
-
-
+```
 Each version is **self-contained**, runnable, and documented.
 
 ---
