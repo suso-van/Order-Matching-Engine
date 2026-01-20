@@ -208,6 +208,21 @@ It is a **systems design and correctness project**.
 - V2: Complete (audit + WAL + recovery)
 - Documentation: Complete
 
+# Runtime Data Directory
+
+This directory contains **runtime-generated artifacts** such as:
+
+- Write-Ahead Logs (WAL)
+- Audit logs
+
+These files are **not committed to version control** because they are:
+- Environment-specific
+- Append-only
+- Potentially large
+
+The directory is intentionally tracked to preserve project structure.
+
+
 This repository is **ready for review and discussion**.
 
 ## How to Run
